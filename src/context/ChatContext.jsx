@@ -23,10 +23,10 @@ export const ChatContextProvider = ({ children, user }) => {
   console.log("Online Users", onlineUsers);
 
   useEffect(()=>{
-    const newSocket=io("http://192.168.0.159:3000" || "https://chatt-e.vercel.app:3000");
+    const newSocket=io("https://late-views-film.loca.lt");
     setSocket(newSocket);
 
-    return ()=>newSocket.disconnect();
+    return ()=>newSocket.disconnect();  
   },[user]);
 
   //add online users
