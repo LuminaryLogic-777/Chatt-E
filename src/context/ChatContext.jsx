@@ -23,10 +23,10 @@ export const ChatContextProvider = ({ children, user }) => {
   console.log("Online Users", onlineUsers);
 
   useEffect(()=>{
-    const newSocket=io("https://late-views-film.loca.lt");
+    const newSocket=io("http://192.168.0.159:3000");
     setSocket(newSocket);
 
-    return ()=>newSocket.disconnect();  
+    return ()=>newSocket.disconnect();
   },[user]);
 
   //add online users
@@ -73,7 +73,7 @@ export const ChatContextProvider = ({ children, user }) => {
         let isChatCreated = false;
         if (user?._id === u._id) return false;
         if (userChats) {
-          userChats?.some((chat) => {
+          isChatCreated=userChats?.some((chat) => {
             return chat.members[0] === u._id || chat.members[1] === u._id;
           });
         }

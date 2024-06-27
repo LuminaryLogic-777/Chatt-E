@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 import { Stack, Container, Row, Col, Button } from "react-bootstrap";
+import avatatImg from '../../assets/avatar.svg'
 import moment from "moment";
 import InputEmoji from "react-input-emoji";
 
@@ -49,8 +50,14 @@ const ChatBox = () => {
 
   return (
     <Stack gap={4} className="chat-box">
-      <div className="chat-header">
-        <strong>{recipientUser?.name}</strong>
+      <div className="chat-header bg-slate-600 text-2xl text-white">
+        <div className="flex items-center gap-3">
+          <span className="bg-white w-10 rounded-full shrink-0"><img src={avatatImg} alt="" /></span>
+          <div>
+            <strong className="leading-none">{recipientUser?.name}</strong>
+            <span className="block text-sm opacity-45">11.04.2024</span>
+          </div>
+        </div>
       </div>
       <Stack gap={3} className="messages" style={{ overflowY: "auto", maxHeight: "400px" }}>
         {messages &&
@@ -63,14 +70,14 @@ const ChatBox = () => {
                   : "message align-self-start flex-grow-0"
               }`}
             >
-              <span>{msg.text}</span>
-              <span>{moment(msg.createdAt).calendar()}</span>
+              <span style={{fontSize: '16px'}}>{msg.text}</span>
+              <span style={{fontSize: '14px', color:'white',opacity: 0.5,marginTop: '5px'}}>{moment(msg.createdAt).calendar()}</span>
             </Stack>
           ))}
         <div ref={messagesEndRef} />
       </Stack>
       <Stack direction="horizontal" gap={3} className="chat-input flex-grow-0">
-        <InputEmoji
+        <InputEmoji className='main_message'
           value={textMessage}
           onChange={setTextMessage}
           onKeyDown={handleKeyPress}  // Use onKeyDown instead of onKeyPress
@@ -78,7 +85,7 @@ const ChatBox = () => {
           borderColor="rgba(72,112,223,0.2)"
         />
         <button
-          className="send-btn"
+          className="send-btn relative"
           onClick={handleSendMessage}
         >
           <svg

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Nav, Navbar, Stack } from "react-bootstrap";
+import { Container, Nav, Navbar, Stack, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -10,52 +10,43 @@ const NavBar = () => {
 
   const handleLogout = () => {
     logoutUser();
+    navigate("/login");
   };
 
-  console.log("userr", user);
-
   return (
-    <Navbar bg="dark" className="mb-4" style={{ height: "3.75rem" }}>
+    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4" style={{ height: "4rem" }}>
       <Container>
-        <h2>
-          <Link to="/" className="link-light text-decoration-none">
-            ChatApp
-          </Link>
-        </h2>
-        <span className="text-warning">Logged in as {user?.name}</span>
-        <Nav>
-          <Stack direction="horizontal" gap="3">
-            {user ? (
-              <>
-                <Link
-                  onClick={handleLogout}
-                  to="/login"
-                  className="link-light text-decoration-none"
-                >
-                  Logout
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="link-light text-decoration-none"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  className="link-light text-decoration-none"
-                >
-                  Register
-                </Link>
-              </>
-            )}
-          </Stack>
-        </Nav>
+        <Navbar.Brand as={Link} to="/" className="fs-3">
+          ChatApp
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Stack direction="horizontal" gap="3" className="align-items-center">
+              {user ? (
+                <>
+                  <span className="text-warning">Logged in as {user?.name}</span>
+                  <Button variant="outline-light" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button as={Link} to="/login" variant="outline-light">
+                    Login
+                  </Button>
+                  <Button as={Link} to="/register" variant="outline-light">
+                    Register
+                  </Button>
+                </>
+              )}
+            </Stack>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
 
 export default NavBar;
+

@@ -17,7 +17,7 @@ const Chat = () => {
       <PotentialChats />
       {userChats?.length < 1 ? null : (
         <Stack direction="horizontal" gap={4} className="align-items-start">
-          <Stack className="messages-box flex-grow-0 pe-3" gap={3}>
+          <Stack className="messages-box flex-grow-0 pe-3">
             {isUserChatsLoading && <p>Loading Chats.....</p>}
             {userChats?.map((chat, idx) => {
               return (
@@ -27,7 +27,7 @@ const Chat = () => {
               );
             })}
           </Stack>
-          <p>Chats</p>
+          {/* <p>Chats</p> */}
           <ChatBox />
         </Stack>
       )}
